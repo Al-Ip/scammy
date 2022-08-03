@@ -19,12 +19,11 @@
         </div>
     </div>
     <div class="flex justify-end items-end mb-3">
-        <span class="cursor-pointer overflow-hidden max-h-40 block p-2.5 mt-5 w-full text-sm text-gray-700 bg-gray-50 rounded-2xl border focus:outline-none
-            border-purple-400 focus:ring-pink-600 focus:border-pink-600 dark:bg-purple-100 dark:border-purple-400 dark:placeholder-gray-400
-            dark:text-black dark:focus:ring-pink-600 dark:focus:border-pink-600"
+        <span class="inputSms cursor-pointer overflow-auto max-h-56 block p-2.5 mt-5 w-full text-sm rounded-2xl border focus:outline-none
+            text-white hover:bg-purple-400 focus:border-[#d36095] bg-[#d36095]"
             placeholder="Your message..." role="textbox" contenteditable> <p class="p-2">Enter message to check here... </p>
         </span>
-        <x-send-sms class="w-auto h-14 p-1 text-pink-600 cursor-pointer hover:text-purple-400" />
+        <x-send-sms class="w-auto h-14 pl-2 text-pink-800 cursor-pointer hover:text-purple-400" />
     </div>
     <button>
 </div>

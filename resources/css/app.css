@@ -2,40 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-  .chat {
+.chat {
     width: 400px;
-    /* border: solid 1px rgb(196 118 232); */
     border-radius: 16px;
     display: flex;
     flex-direction: column;
     padding: 10px;
-  }
+}
 
-  .messages {
+.messages {
     margin-top: 30px;
     display: flex;
     flex-direction: column;
-  }
+}
 
-  .message {
+.message {
     border-radius: 20px;
     padding: 8px 15px;
     margin-top: 5px;
     margin-bottom: 5px;
     display: inline-block;
-  }
+}
 
-  .yours {
+.yours {
     align-items: flex-start;
-  }
+}
 
-  .yours .message {
+.yours .message {
     margin-right: 25%;
-    background-color: #eee;
+    background-color: #E8E8E8;
     position: relative;
-  }
+}
 
-  .yours .message.last:before {
+.yours .message.last:before {
     content: "";
     position: absolute;
     z-index: 0;
@@ -43,10 +42,12 @@
     left: -7px;
     height: 20px;
     width: 20px;
-    background: #eee;
+    @apply dark:bg-[#E8E8E8];
+    @apply bg-[#E8E8E8];
     border-bottom-right-radius: 15px;
-  }
-  .yours .message.last:after {
+}
+
+.yours .message.last:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -54,23 +55,25 @@
     left: -10px;
     width: 10px;
     height: 20px;
-    background: white;
+    @apply dark:bg-slate-900;
+    @apply bg-white;
     border-bottom-right-radius: 10px;
-  }
+    }
 
-  .mine {
+.mine {
     align-items: flex-end;
-  }
+}
 
-  .mine .message {
+.mine .message {
     color: white;
     margin-left: 25%;
-    background: linear-gradient(to bottom, #c6cbcc 0%, #db2777 100%);
+    /* background: linear-gradient(to bottom, #c6cbcc 0%, #db2777 100%); */
+    @apply bg-gradient-to-b from-[#c6cbcc] to-[#db2777];
     background-attachment: fixed;
     position: relative;
-  }
+}
 
-  .mine .message.last:before {
+.mine .message.last:before {
     content: "";
     position: absolute;
     z-index: 0;
@@ -78,12 +81,12 @@
     right: -8px;
     height: 20px;
     width: 20px;
-    background: linear-gradient(to bottom, #c6cbcc 0%, #db2777 100%);
+    @apply bg-gradient-to-b from-[#c6cbcc] to-[#db2777];
     background-attachment: fixed;
     border-bottom-left-radius: 15px;
-  }
+}
 
-  .mine .message.last:after {
+.mine .message.last:after {
     content: "";
     position: absolute;
     z-index: 1;
@@ -91,7 +94,19 @@
     right: -10px;
     width: 10px;
     height: 20px;
-    background: white;
+    @apply dark:bg-slate-900;
+    @apply bg-white;
     border-bottom-left-radius: 10px;
-  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.inputSms::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.inputSms {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
 
