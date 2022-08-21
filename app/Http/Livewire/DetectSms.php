@@ -12,21 +12,19 @@ class DetectSms extends Component
     public string $sms;
     public Collection $smsResults;
     public bool $isScam;
+    public bool $isNotScam;
 
-    protected $listeners = ['publishMessage'];
+    protected $listeners = ['detect'];
 
     public function mount()
     {
+        //$this->sms = " Please pay the remaining cost at 098323523.";
         $this->sms = "Enter message to check here...";
         $this->isScam = false;
         $this->smsResults = new Collection();
     }
 
-    public function publishMessage(){
-        $this->detect();
-    }
-
-    private function detect(){
+    public function detect(){
         error_log($this->sms);
         $jsonSms = json_encode(array('smsText' => $this->sms, 'label' => "", 'score' => 0));
 
@@ -44,17 +42,21 @@ class DetectSms extends Component
         //dd(json_decode($process->getOutput(), true));
         $this->smsResults = collect(json_decode($process->getOutput(), true));
 
-        $isResultScam = $this->smsResults->where('label', 'LABEL_1');
+        $isResultScam = $this->smsResults->filter(function($label){
+            return $label == 'LABEL_1';
+        });
 
         error_log($isResultScam);
 
         if($isResultScam != null && !$isResultScam->isEmpty()){
             error_log("IS SPAM KID");
             $this->isScam = true;
-            return;
+            $this->isNotScam = false;
         }
-
-        $this->isScam = false;
+        else{
+            $this->isNotScam = true;
+            $this->isScam = false;
+        }
 
         foreach ($this->smsResults as $key => $value) {
             error_log($key. ' - ' .$value);
