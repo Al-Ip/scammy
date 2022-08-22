@@ -2,7 +2,158 @@
 @tailwind components;
 @tailwind utilities;
 
-.chat {
+
+div.chat-wrapper {
+    width: 100%;
+    position: relative;
+  }
+
+  div.chat-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 15px;
+    height: 120px;
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgb(15 23 42 / 1) 10%, rgba(255, 255, 255, 0));
+  }
+
+  div.chat {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: scroll;
+    height: 500px;
+  }
+
+
+/* .containerwrapper {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    padding: 1%;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow-y: auto;
+    overflow: hidden;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+     -ms-transform: translate(-50%, -50%);
+         transform: translate(-50%, -50%);
+  }
+
+  .containerwrapper:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    background: linear-gradient(to bottom, rgb(15 23 42 / 1) 30%, rgba(255, 255, 255, 0)) repeat-x;
+    height: 50%;
+    width: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  } */
+
+/* *, *::before {
+    box-sizing: border-box;
+  }
+
+  .chat {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: scroll;
+    color: #313131;
+    position: relative;
+    scroll-behavior: smooth;
+    padding-bottom: 2rem;
+  }
+
+  .chat::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom, rgb(15 23 42 / 1) 20%, rgba(255, 255, 255, 0)) repeat-x;
+    background: linear-gradient(to bottom, white 20%, rgba(255, 255, 255, 0)) repeat-x;
+  } */
+
+  .container p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .chat__content {
+    flex: 0 1 auto;
+    padding: 1rem;
+    margin: 0 0.5rem;
+    background: var(--bgcolor);
+    border-radius: var(--radius);
+  }
+
+  .chat__message {
+    width: 45%;
+    display: flex;
+    align-items: flex-end;
+    transform-origin: 0 100%;
+    padding-top: 0;
+    transform: scale(0);
+    max-height: 0;
+    overflow: hidden;
+    animation: message 0.15s ease-out 0s forwards;
+    animation-delay: var(--delay);
+    --bgcolor: #d8d8d8;
+    --radius: 8px 8px 8px 0;
+  }
+
+  .chat__message_B {
+    flex-direction: row-reverse;
+    text-align: left;
+    align-self: flex-end;
+    transform-origin: 100% 100%;
+    color: rgb(231, 231, 231);
+
+    --bgcolor: #b458bd;
+    --radius: 8px 8px 0 8px;
+  }
+
+  .chat__message::before {
+    content: "";
+    flex: 0 0 40px;
+    aspect-ratio: 1/1;
+    background: var(--bgcolor);
+    border-radius: 50%;
+  }
+
+  @keyframes message {
+    0% {
+      max-height: 100vmax;
+    }
+    80% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      max-height: 100vmax;
+      overflow: visible;
+      padding-top: 1rem;
+    }
+  }
+
+/* .chat {
     width: 400px;
     border-radius: 16px;
     display: flex;
@@ -22,6 +173,8 @@
     margin-top: 5px;
     margin-bottom: 5px;
     display: inline-block;
+    animation: expand-bounce;
+    animation-duration: 0.25;
 }
 
 .yours {
@@ -67,7 +220,6 @@
 .mine .message {
     color: white;
     margin-left: 25%;
-    /* background: linear-gradient(to bottom, #c6cbcc 0%, #db2777 100%); */
     @apply bg-gradient-to-b from-[#c6cbcc] to-[#db2777];
     background-attachment: fixed;
     position: relative;
@@ -97,7 +249,7 @@
     @apply dark:bg-slate-900;
     @apply bg-white;
     border-bottom-left-radius: 10px;
-}
+} */
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .inputSms::-webkit-scrollbar {
@@ -108,6 +260,18 @@
 .inputSms {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.chat::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.songs::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .textarea-sms {
@@ -121,3 +285,17 @@
 
     resize: none; /*remove the resize handle on the bottom right*/
 }
+
+
+@keyframes expand-bounce {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.25);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
