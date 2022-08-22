@@ -11,10 +11,12 @@ class DetectSms extends Component
 {
     public string $sms;
     public Collection $smsResults;
+    public Collection $smsInfoHistory;
     public bool $isScam;
     public bool $isNotScam;
+    public int $smsCount;
 
-    protected $listeners = ['detect'];
+    protected $listeners = ['detect', 'sendSms'];
 
     public function mount()
     {
@@ -22,6 +24,13 @@ class DetectSms extends Component
         $this->sms = "Enter message to check here...";
         $this->isScam = false;
         $this->smsResults = new Collection();
+        $this->smsInfoHistory = new Collection(['chatPosition' => 'message last', 'chatText' => 'Hey!']);
+        $this->smsCount = 0;
+    }
+
+    public function sendSms(){
+        $this->smsHistory->push($this->sms);
+        $this->emit("detect");
     }
 
     public function detect(){
