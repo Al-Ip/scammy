@@ -11,10 +11,7 @@ class DetectSms extends Component
 {
     public string $sms;
     public Collection $smsResults;
-    public Collection $smsInfoHistory;
-    public bool $isScam;
-    public bool $isNotScam;
-    public int $smsCount;
+    public Collection $conversationHistory;
 
     protected $listeners = ['detect', 'sendSms'];
 
@@ -22,14 +19,15 @@ class DetectSms extends Component
     {
         //$this->sms = " Please pay the remaining cost at 098323523.";
         $this->sms = "Enter message to check here...";
-        $this->isScam = false;
         $this->smsResults = new Collection();
-        $this->smsInfoHistory = new Collection(['chatPosition' => 'message last', 'chatText' => 'Hey!']);
-        $this->smsCount = 0;
+        $this->conversationHistory = new Collection();
+        $this->addToConversation("A", "Hi 😀", "1s");
+        $this->addToConversation("A", "Welcome to Scammy! \n - A place where you can enter an sms text and find out if its a scam or not!", "5s");
+        $this->addToConversation("A", "You can type your text below and hit the send button for the result!", "9s");
     }
 
     public function sendSms(){
-        $this->smsHistory->push($this->sms);
+        $this->addToConversation("B", $this->sms, "1s");
         $this->emit("detect");
     }
 
@@ -55,23 +53,20 @@ class DetectSms extends Component
             return $label == 'LABEL_1';
         });
 
-        error_log($isResultScam);
-
         if($isResultScam != null && !$isResultScam->isEmpty()){
-            error_log("IS SPAM KID");
-            $this->isScam = true;
-            $this->isNotScam = false;
+            $this->addToConversation("A", "The sms you sent is most likely a spam or malicious text! ⚠️", "1s");
         }
         else{
-            $this->isNotScam = true;
-            $this->isScam = false;
+            $this->addToConversation("A", "The sms you sent is not spam! 🎉", "1s");
         }
+    }
 
-        foreach ($this->smsResults as $key => $value) {
-            error_log($key. ' - ' .$value);
-        }
-
-        error_log("FINSIHED CHECK - result / ". $this->isScam);
+    public function addToConversation($type, $text, $delay){
+        $this->conversationHistory->prepend([
+            "type" => $type,
+            "text" => $text,
+            "delay" => $delay
+        ]);
     }
 
     public function render()

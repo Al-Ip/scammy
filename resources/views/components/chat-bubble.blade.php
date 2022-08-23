@@ -1,8 +1,11 @@
 @props([
-    'chatPosition',
-    'chatText'
+    'chatType',
+    'chatText',
+    'chatDelay'
 ])
 
-<div class="{{ $chatPosition }} ease-in duration-900">
-    {{ $chatText }}
+<div class="chat__message  chat__message_{{ $chatType }}" style="--delay: {{ $chatDelay }};">
+    <div class="chat__content">
+        <p>{{ $chatText }}</p>
+    </div>
 </div>
